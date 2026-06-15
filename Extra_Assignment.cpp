@@ -166,6 +166,7 @@ class CargoHold{
     }
 
     void set(size_t i, int v){ if(i<size) cargoIds[i]=v; }
+    //Aqui utilizo el operador ternario, una forma mas compacta de usar un if/else
     int get(size_t i) const{ return (i<size) ? cargoIds[i] : -1; }
     size_t getSize() const{ return size; }
 };
@@ -247,9 +248,12 @@ class Spacecraft : public Entity{
 
     void consumeFuel(int amount){ fuelTank.consume(amount); }
 };
-
+//implementación de showFleet, recorre todo ships y llama render para cada uno jeje
+//utilizo el Fleet::showfleet para decirle al compilador que este es parte de fleet, lo hago porque spacecraft aun no existe cuando declaro fleet, entonces sirve para despues llamarlo
 void Fleet::showFleet() const{
-    for(const auto& s : ships) s->render();
+    for(int i = 0; i < ships.size(); i++){
+        ships[i]->render();
+    }
 }
 
 int main(){
