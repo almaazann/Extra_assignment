@@ -67,6 +67,10 @@ class Module{
         cout<<"Module creado"<<endl;
     }
 
+    // Without virtual, deleting through Module* skips the derived destructor:
+    // Module* m = new Engine("X", 10);
+    // delete m; Only ~Module() runs, ~Engine() is skipped,this leads to a emory leak
+    // Fix: declare virtual ~Module() so the correct destructor is always called
     virtual ~Module(){
         cout<<"Module destruido"<<endl;
     }
